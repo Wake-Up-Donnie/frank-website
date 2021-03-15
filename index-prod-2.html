@@ -1,0 +1,735 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/splide.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.4.6/dist/css/splide-extension-video.min.css" integrity="sha256-nZJWefZxHmYJe1K2TFC2GxGaAlque1b6EqZbIcxE+hI=" crossorigin="anonymous"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.4.6/dist/js/splide-extension-video.min.js" integrity="sha256-I3Lk9RNz3uJpEcexacrPX4zspt56m+ENJZtMWkCRy5I=" crossorigin="anonymous"></script>
+
+
+<script>
+
+// (function($){
+//     $.fn.extend({
+//         rotaterator: function(options) {
+//
+//             var defaults = {
+//                 fadeSpeed: 500,
+//                 pauseSpeed: 100,
+// 				child:null
+//             };
+//
+//             var options = $.extend(defaults, options);
+//
+//             return this.each(function() {
+//                   var o =options;
+//                   var obj = $(this);
+//                   var items = $(obj.children(), obj);
+// 				  items.each(function() {$(this).hide();})
+// 				  if(!o.child){var next = $(obj).children(':first');
+// 				  }else{var next = o.child;
+// 				  }
+// 				  $(next).fadeIn(o.fadeSpeed, function() {
+// 						$(next).delay(o.pauseSpeed).fadeOut(o.fadeSpeed, function() {
+// 							var next = $(this).next();
+// 							if (next.length == 0){
+// 									next = $(obj).children(':first');
+// 							}
+// 							$(obj).rotaterator({child : next, fadeSpeed : o.fadeSpeed, pauseSpeed : o.pauseSpeed});
+// 						})
+// 					});
+//             });
+//         }
+//     });
+// })(jQuery);
+//
+//  $(document).ready(function() {
+//         $('#rotate').rotaterator({fadeSpeed:1000, pauseSpeed:200});
+//  });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//   var splide = new Splide('#splide', {
+//     type         : 'loop',
+//     perPage      : 1,
+//     autoplay     : true,
+//     interval     : 15000, // How long to display each slide
+//     pauseOnHover : false, // must be false
+//     pauseOnFocus : false // must be false
+//     // resetProgress: false
+//   } ).mount()
+// });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//   var splide = new Splide( '#splide', {
+// 	type   : 'loop',
+// 	padding: {
+// 		right: '5rem',
+// 		left : '5rem',
+// 	},
+// } ).mount();
+
+
+//   var button = document.querySelector('.splide__play-pause');
+//
+//   if (button) {
+//     var pausedClass = 'is-paused';
+//
+//     // Remove the paused class and change the label to "Pause".
+//     splide.on('autoplay:play', function () {
+//       button.classList.remove(pausedClass);
+//       button.textContent = 'Pause';
+//       button.setAttribute('aria-label', 'Pause Autoplay');
+//     });
+//
+//     // Add the paused class and change the label to "Play".
+//     splide.on('autoplay:pause', function () {
+//       button.classList.add(pausedClass);
+//       button.textContent = 'Play';
+//       button.setAttribute('aria-label', 'Start Autoplay');
+//     });
+//
+//     // Toggle play/pause when the button is clicked.
+//     splide.on('click', function () {
+//       var flag     = 99;
+//       var Autoplay = splide.Components.Autoplay;
+//
+//       if (button.classList.contains(pausedClass)) {
+//         Autoplay.play(flag);
+//       } else {
+//         Autoplay.pause(flag);
+//       }
+//     }, button);
+//   }
+// });
+</script>
+
+
+<style>
+
+video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+  .splide__optional-button-container {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/*.splide__slide {*/
+/*  min-height: 100px;*/
+/*  text-align: center;*/
+/*}*/
+/*.overlay-desc {*/
+/*  background: rgba(0,0,0,0);*/
+/*  position: absolute;*/
+/*  top: 0; right: 0; bottom: 0; left: 0;*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*}*/
+
+/*h1 {*/
+/*  color: white;*/
+/*  font-family: 'Nobile', sans-serif;*/
+/*  font-size: 9vw;*/
+/*  text-align: center;*/
+/*}*/
+
+/*#video-bg {*/
+/*  width: 100%;*/
+/*  height: 500px;*/
+/*}*/
+
+/*div#video-bg video {*/
+/*  object-fit: fill;*/
+/*}*/
+/*.vid{*/
+/*  width: 100%;*/
+/*  height: 500px;*/
+/*}*/
+
+  body {
+  margin: 0;
+  padding: 0;
+}
+div#videoSection video {
+  object-fit: cover;
+}
+
+div#videoSectionSlider video {
+  object-fit: cover;
+}
+
+#videoSectionSlider {
+  position: relative;
+  width: 100%;
+  height: 650px;
+  overflow: hidden;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  z-index: -1;
+}
+
+#videoSection {
+  position: relative;
+  width: 100%;
+  height: 650px;
+  overflow: hidden;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  opacity: 0.50;
+  z-index: -1;
+}
+#video-elem {
+  position: absolute;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+z-index: -1;
+}
+.videoOverlay {
+  background: rgba(0,0,0,0);
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+z-index: -1;
+
+}
+</style>
+<style>
+.videowrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.videowrapper iframe {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <meta name="MobileOptimized" content="width" />
+    <meta name="HandheldFriendly" content="true" />
+        <!-- Lets get mobile -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="True" name="HandheldFriendly"/>
+    <meta id="viewport-tag" name="viewport"
+          content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"/>
+    <!-- favicon-->
+<!--    <link href="assets/css/landing-page.min.css" rel="stylesheet">-->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <!-- Site Title-->
+    <title>Frank Flores - Real Estate Agent</title>
+    <meta name="description" content="Frank Flores - Real Estate Agent">
+    <!-- Bootstrap CSS file-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Flickity CSS file-->
+    <link href="assets/css/flickity.min.css" rel="stylesheet">
+    <!-- Main CSS file-->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Fontawesome 5 CSS file-->
+    <link href="assets/css/fontawesome-all.min.css" rel="stylesheet">
+    <!-- Magnific Popup CSS-->
+    <link href="assets/css/magnific-popup.css" rel="stylesheet">
+    <!-- Google Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap">
+
+
+
+    <!-- Navbar-->
+    <div class="site-header">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">
+            <img class="site-logo" src="assets/images/logo.png" alt="Logo"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+
+              <li class="nav-item"><a class="nav-link" href="https://www.homesbyfrank.net/map/">Search Properties</a></li>
+
+              <li class="nav-item"><a class="nav-link" href="https://www.homesbyfrank.net/sell/">Sell Your Property</a></li>
+
+              <li class="nav-item"><a class="nav-link" href="page-property-list.html">Sold Properties</a></li>
+
+              <li class="nav-item"><a class="nav-link" href="page-testimonials.html">Testimonials</a></li>
+
+              <li class="nav-item"><a class="nav-link" href="page-contact.html">Contact Us</a></li>
+            </ul>
+            <ul class="nav-modules">
+              <!-- Social nav-->
+              <li class="d-flex align-items-center">
+                <i class="fas fa-phone-alt">
+                </i>
+                <a class="nav-link text-ebony-clay pr-0" href="page-contact.html">+1 (760) 809-1474</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- End Navbar-->
+
+<!--   <article class="entry">-->
+
+<!--  <section class="topInfo1">-->
+          <div id="videoSection">
+              <video autoplay loop muted playsinline>
+                  <source src="assets/videos/lakeside.mp4" type="video/mp4">
+
+              </video>
+
+         </div>
+
+          <div class="videoOverlay">
+              <div class="container">
+                  <div class="row text-center">
+                      <div class="col-md-8 col-md-offset-2">
+<!--                          <h1>FRANK FLORES</h1>-->
+
+
+                              <h1 style=" color:black; display: flex; flex-direction: column; "> Frank Flores </h1>
+                              <div id="rotate">
+                                <div> <h1> REAL ESTATE AGENT  </h1>
+                                </div>
+                                <div> <h1> Assisting Buyers And Sellers Throughout San Diego </h1>
+                                </div>
+                                <div> <h1> Over 30 Years Experience </h1>
+                                </div>
+                                <div> <h1> Lets Discover Your Next Dream Home </h1>
+                                </div>
+                              </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+<!--          <div id="videoSection">-->
+<!--                <video class="lozad" preload="auto" playsinline data-autoplay-desktop="true" data-autoplay-portrait="true" data-autoplay-mobile="true" muted loop-->
+<!--                       poster="https://www.tesla.com/xNVh4yUEc3B9/performance_desktop_still.png" data-poster-desktop="https://www.tesla.com/xNVh4yUEc3B9/performance_desktop_still.png"-->
+<!--                           data-poster-portrait="https://www.tesla.com/xNVh4yUEc3B9/performance_desktop_still.png"-->
+<!--                           data-poster-mobile="https://www.tesla.com/xNVh4yUEc3B9/performance_mobile_still.png"-->
+<!--                 data-src-desktop="https://www.tesla.com/xNVh4yUEc3B9/performance_video_desktop.mp4" data-src-mobile="https://www.tesla.com/xNVh4yUEc3B9/peformance_video_mobile.mp4" data-src-portrait="https://www.tesla.com/xNVh4yUEc3B9/performance_video_desktop.mp4" data-object-fit="true"></video>-->
+
+<!--          </div>-->
+           <div class="seventy-five-percent-bg">
+               <div class="pt-lg-6 pb-lg-0 pt-md-6 pb-md-7 pt-5 pb-5">
+                 <div class="container mt-2 mb-lg-7">
+                   <div class="row">
+                     <div class="col-lg-6 mn-7 order-lg-1"><img src="assets/images/home/frank.jpg" alt="home"></div>
+<!--                     <div class="bs-light-gray">-->
+
+                     <div class="col-lg-6 col-md-12 pb-lg-4 my-auto">
+                       <div class="mt-lg-0 mt-md-5 mt-4">
+                         <div class="pr-lg-6 pr-md-6">
+                           <h1 class="mt-3 mb-4 text-white">Help You to Find Highest Quality Real Estate</h1>
+                           <div class="pt-2">
+                             <p class="lead mb-4 text-white">As an agent who's an expert in North San Diego County,
+                               I bring a wealth of knowledge and expertise about buying and selling real estate here.
+                               It's not the same everywhere, so you need someone you can trust for up-to-date information.
+                               I am eager to serve you. </p>
+                              <p class="lead mb-4 text-white">CalRE #01970158 </p>
+                           </div><a class="btn btn-white text-black mt-4" href="https://www.homesbyfrank.net/map/">Search for Homes</a>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+              </div>
+<!--             </div>-->
+
+
+
+
+
+
+
+        <!-- content title-->
+        <div class="container pt-lg-8 pb-lg-5 pt-md-6 pb-md-5 pt-5 pb-4">
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="pr-lg-5">
+                <h1>Some of The Things I Can Do For You</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- icon box-->
+        <div class="container mt-2">
+          <div class="row gx-lg-5">
+            <div class="col-lg-4">
+              <div style="background-color: #cecece;">
+                <div class="px-4 py-5">
+                  <div class="px-2"> <i class="fas fa-home icon-border bg-white" style="color: #cecece;"></i>
+                    <h4 class="mb-3">Find Your Next Home</h4>
+                    <p class="mb-0">You need someone who knows this area inside and out! I can work with you to find the right home at the right price for you, including all the neighborhood amenities that matter - not to mention the essential criteria you have for your ideal home.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mt-lg-0 mt-md-4 mt-3">
+              <div class="bg-silver-chalice" >
+                <div class="px-4 py-5">
+                  <div class="px-2"><i class="px-3 fas fa-handshake icon-border bg-white text-silver-chalice"></i>
+                    <h4 class="mb-3 text-white">Sell a Home</h4>
+                    <p class="mb-0 text-white">When it's time to move, you need someone who will advertise your home, show to prospective buyers, negotiate the purchase contract, arrange financing, oversee the inspections, handle all necessary paperwork and supervise the closing. I can take care of everything you need, from start to close.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mt-lg-0 mt-md-4 mt-3">
+              <div class="bg-mid-gray">
+                <div class="px-4 py-5">
+                  <div class="px-2"><i class="px-4 fas fa-file-contract icon-border bg-white text-mid-gray"></i>
+                    <h4 class="mb-3 text-white">Consult on Home Selling Tactics</h4>
+                    <p class="mb-0 text-white">Oftentimes buyers don't visualize living in your home the way you do. I can make your home attractive to its ideal audience - which can help you get top dollar. Things like staging the home, making repairs or minor improvements, or even simply painting the walls can be the difference between a home resting on the market and one that's sold fast.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--one place-->
+        <div class="container mt-lg-8 mt-md-6 mt-5">
+          <div class="row gx-lg-5">
+            <div class="col-lg-6 order-lg-1"><img src="//images.marketleader.com/assets/04/1925104_39870743_f.jpg" alt="home"></div>
+            <div class="col-lg-6 col-md-12 pb-lg-4 my-auto">
+              <div class="mt-lg-0 mt-md-5 mt-3">
+                <div class="pr-lg-9 pr-md-7 pr-4">
+                  <h1 class="mt-3 mb-4">Buying and Selling All in One Place</h1>
+                  <p class="mb-lg-5 mb-md-4 mb-4">Curabitur metus risus, mollis sollicitudin vulputate volutpat risus. Etiam in sem ac nulla eleifend volutpat. Morbi nec posuere orci. Suspendisse enim velit, venenatis quis arcu sed, convallis euismod risus.</p>
+                  <a class="btn btn-mid-gray text-ebonny-clay" href="page-contact.html">Contact Us</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container mt-lg-7 mb-lg-5 mt-md-6 mb-md-4 mt-5 mb-4">
+          <div class="row">
+            <div class="col-lg-6">
+              <h1 class="mb-4">Recently Sold Properties</h1>
+              <div class="pr-6">
+<!--                <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Aenean accumsan lectus magna</p>-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- property-->
+        <div class="container">
+          <div class="row gx-lg-5 property-block">
+            <div class="col-lg-4">
+              <article class="property-item">
+                <div class="content-image"><img src="//images.marketleader.com/HouseImages/CAREG/295/200029295.jpg" alt="property"></div>
+                <h5 class="content-title"><a href="">17326 Lakeview Ave Lake Elsinore, CA, 92530</a></h5>
+                <div class="content-price">$918,000</div><span class="content-meta"><span class="pr-3"><i class="fas fa-ruler-combined pr-3"> </i>3662 sq ft</span>|     <span class="px-3"><i class="fas fa-bed pr-3"> </i>4 beds</span>|<span class="pl-3"><i class="fas fa-bath pr-3"> </i>3 baths </span></span>
+              </article>
+            </div>
+            <div class="col-lg-4 mt-lg-0 mt-md-5 mt-5">
+              <article class="property-item">
+                <div class="content-image"><img src="//images.marketleader.com/HouseImages/CAREG/248/NDP2100248.jpg" alt="property"></div>
+                <h5 class="content-title"><a href="">39107 N. Shore Dr Fawnskin, CA, 92333</a></h5>
+                <div class="content-price">$799,900</div><span class="content-meta"><span class="pr-3"><i class="fas fa-ruler-combined pr-3"> </i>2001 sq ft</span>|     <span class="px-3"><i class="fas fa-bed pr-3"> </i>3 beds</span>|<span class="pl-3"><i class="fas fa-bath pr-3"> </i>4 baths</span></span>
+              </article>
+            </div>
+
+            <div class="col-lg-4 mt-lg-0 mt-md-5 mt-5">
+              <article class="property-item">
+                <div class="content-image"><img src="assets/images/property/oceanside.jpg" alt="property"></div>
+                <h5 class="content-title"><a href="">503 Primrose Way Oceanside, CA, 92057</a></h5>
+                <div class="content-price">$545,500</div><span class="content-meta"><span class="pr-3"><i class="fas fa-ruler-combined pr-3"> </i>1620 sq ft</span>|     <span class="px-3"><i class="fas fa-bed pr-3"> </i>3 beds</span>|<span class="pl-3"><i class="fas fa-bath pr-3"> </i>2 baths</span></span>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div class="container text-center"><a class="btn btn-mid-gray text-ebonny-clay" href="page-property-list.html">Find more property</a></div>
+
+
+
+<!--      <div class="splide">-->
+<!--        <div class="splide__track">-->
+<!--          <ul class="splide__list">-->
+<!--            <li class="splide__slide">Slide 01</li>-->
+<!--            <li class="splide__slide">Slide 02</li>-->
+<!--            <li class="splide__slide">Slide 03</li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </div>-->
+    <div class="bg-athens-gray">
+    <div class="container mt-lg-7 mb-lg-5 mt-md-6 mb-md-4 mt-5 mb-4">
+
+      <div class="row">
+      <div class="col-lg-0">
+        <h1 class="mb-4">Sold Properties</h1>
+
+
+        <div class="splide">
+      <div class="splide__track">
+          <ul class="splide__list">
+              <li class="splide__slide" data-splide-html-video="assets/videos/400.mp4">
+              </li>
+              <li class="splide__slide" data-splide-youtube="https://www.youtube.com/watch?v=JWdWCtLMoU04">
+              </li>
+<!--              <li class="splide__slide" data-splide-html-video="/assets/videos/400.mp4">-->
+<!--              </li>-->
+          </ul>
+      </div>
+    </div>
+<!--        <div class="splide">-->
+<!--          <div class="splide__track">-->
+<!--            <ul class="splide__list">-->
+<!--              <li class="splide__slide">-->
+<!--                <div id="videoSectionSlider">-->
+<!--                  <video autoplay loop muted playsinline>-->
+<!--                    <source src='https://drive.google.com/uc?export=download&id=1nQ6jZTjA8135juS5iG5KeRBg_voue9tV' type="video/mp4">-->
+<!--                  </video>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--              <li class="splide__slide">-->
+<!--                <div id="videoSectionSlider">-->
+<!--                  <video autoplay loop muted playsinline>-->
+<!--                    <source src='https://drive.google.com/uc?export=download&id=1Kle99Lbc5VaxaS8Q8HKB-C3huIb5LMpW' type="video/mp4">-->
+<!--                  </video>-->
+<!--              </li>-->
+<!--              <li class="splide__slide">-->
+<!--                 <div id="videoSectionSlider">-->
+<!--                  <video autoplay loop muted playsinline>-->
+<!--                    <source src='https://drive.google.com/uc?export=download&id=1LL-d2_jv1zTB2sVxqtK8dQE0A9z8YAXb' type="video/mp4">-->
+<!--                  </video>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--              <li class="splide__slide">-->
+<!--                 <div id="videoSectionSlider">-->
+<!--                  <video autoplay loop muted playsinline>-->
+<!--                    <source src='https://drive.google.com/uc?export=download&id=1sOwLdfM-PcATKcIaI2TkbuFVuuY0J0Cd' type="video/mp4">-->
+<!--                  </video>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--              <li class="splide__slide">-->
+<!--                 <div id="videoSectionSlider">-->
+<!--                  <video  autoplay loop muted playsinline>-->
+<!--                    <source src='https://drive.google.com/uc?export=download&id=1-KIyV1odWLY0IPywC3qQ9MZ2D5yKGmpI' type="video/mp4">-->
+<!--                  </video>-->
+<!--                </div>-->
+<!--              </li>-->
+
+<!--              <li class="splide__slide">Slide 06-->
+<!--                 <div id="videoSectionSlider">-->
+<!--                  <video autoplay loop muted playsinline>-->
+<!--                    <source src='https://drive.google.com/uc?export=download&id=1sOwLdfM-PcATKcIaI2TkbuFVuuY0J0Cd' type="video/mp4">-->
+<!--                  </video>-->
+<!--                </div>-->
+<!--              </li>-->
+
+<!--              <li class="splide__slide">Slide 07-->
+<!--                 <div id="videoSectionSlider">-->
+<!--                  <video id="video-elem"  autoplay loop muted playsinline>-->
+<!--                    <source src='https://drive.google.com/uc?export=download&id=1-KIyV1odWLY0IPywC3qQ9MZ2D5yKGmpI' type="video/mp4">-->
+<!--                  </video>-->
+<!--                </div>-->
+<!--              </li>-->
+
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+      </div>
+    </div>
+    </div>
+
+        <!-- memeber-->
+        <div class="container my-lg-9 my-md-7 my-5">
+          <div class="row gx-lg-0">
+            <div class="col-lg-6"><img src="assets/images/sarah.jpg" alt="member"></div>
+            <div class="col-lg-6 mn-6 bg-livender my-auto">
+              <div class="py-lg-6 px-lg-6 py-md-6 px-md-5 py-5 px-4"><i class="mb-4 h2 display-5 fas fa-quote-left text-mid-gray"></i>
+                <p class="paragraph-extend mb-lg-5 mb-md-4 mb-3" style ="font-size: 22px;">
+                   "This letter is to praise Frank Flores for an outstanding job as my realtor.
+                  He went out of his way to help me sell a condo in a very competitive and difficult market.
+                  Provided helpful critical advice! He marketed it so well that the first weekend I had close to 200 views on the Internet.
+                  He held at least 4 open houses to capture buyers. He spent a lot of extra time with the sale.
+                  It sold!
+                  I have lived in and sold five homes and in all that experience I have never encountered a better real estate agent than Frank!
+                    He is a dynamic salesman, agent and a great guy. Highly recommend him."
+                </p>
+                <h5>Patricia McFeaters,</h5>
+                <p class="mb-0">Client</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ready to get started-->
+        <div class="bg-mid-gray">
+          <div class="container">
+            <div class="py-lg-8 py-md-7 py-6">
+              <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                  <div class="text-center">
+                    <h1 class="mb-3 text-white">Ready to get started?</h1>
+                    <div class="pt-3">
+<!--                      <p class="px-lg-6 mb-5 text-white">Enim ad minim veniam, quis nostrud exercitation ullamc laboris nisi ut aliquip ex ea commodo consequat. Donec ornare orci est, a condimentum elit varius eu.</p>-->
+                    </div><a class="btn btn-white text-mid-gray" href="page-contact.html">Contact Us</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+<!--     Footer-->
+    <footer class="site-footer">
+      <div class="footer-widgets">
+        <div class="container">
+          <div class="row gx-lg-5">
+            <div class="col-lg-6 pr-lg-2">
+              <div class="footer-widget footer-widget-1">
+                <h2 class="mb-4 text-ebony-clay">Frank Flores</h2>
+                <p class="text-abbey pr-6">Real Estate Agent</p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="row gx-lg-4">
+                <div class="col-lg-5">
+                  <div class="footer-widget footer-widget-4">
+                    <ul>
+                      <li><a href="page-contact-us.html">Contact Me</a></li>
+                      <li><a href="page-contact-us.html">Frank.Flores@camoves.com</a></li>
+                      <li><a href="page-contact-us.html">+1(760) 809 1474</a></li>
+                      <li><a href="page-contact-us.html">Careers</a></li>
+                      <li><a href="page-contact-us.html">Press</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="footer-widget footer-widget-3">
+                    <div class="text-abbey">
+                      <p class="mb-0">Address</p>
+                      7020 Avenida Encinas
+                      <p>Carlsbad, CA 92011</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="footer-widget footer-widget-2">
+                    <ul>
+                      <li><a href="index.html">Home</a></li>
+                      <li><a href="https://www.homesbyfrank.net/map/">Search Properties</a></li>
+                      <li><a href="https://www.homesbyfrank.net/sell/">Sell Your Property</a></li>
+                      <li><a href="page-property-list.html">Sold Properties</a></li>
+                      <li><a href="page-testimonials.html">Testimonials</a></li>
+                      <li><a href="page-about-us.html">Contact Me</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<!--      <div class="footer-bottom-area">-->
+<!--        <div class="container">-->
+<!--          <div class="row gx-5 align-items-center">-->
+<!--            <div class="col-lg-6 col-md-12">-->
+
+<!--            </div>-->
+<!--            <div class="col-lg-6 col-md-12">-->
+<!--              <div class="footer-widget">-->
+<!--                <ul class="list-inline m-lg-0 p-lg-0 text-md-right footer-nav">-->
+<!--                  <li><a href="page-privacy-terms.html">Privacy Policy</a></li>-->
+<!--                  <li><a href="page-privacy-terms.html">Terms & Conditions</a></li>-->
+<!--                  <li class="list-inline-item py-lg-2 py-md-4 py-3 pl-lg-5 pl-md-10 pr-2"><a href="#"><i class="fab fa-linkedin-in icon"></i></a></li>-->
+<!--                  <li class="list-inline-item py-2 pr-2"><a href="#"><i class="fab fa-facebook-square icon"></i></a></li>-->
+<!--                  <li class="list-inline-item py-2 pr-2"><a href="#"><i class="fab fa-twitter icon"></i></a></li>-->
+<!--                  <li class="list-inline-item py-2 pr-2"><a href="#"><i class="fab fa-instagram icon"></i></a></li>-->
+<!--                </ul>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+    </footer>
+    <!-- End Footer-->
+    <!-- javascript files-->
+    <!-- jquery-->
+    <script src="assets/js/jquery.min.js"></script>
+    <!-- lozad js-->
+    <script src="assets/js/lozad.min.js"></script>
+    <!-- Bootstrap js-->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Aos js-->
+    <script src="assets/js/aos.js"></script>
+    <!-- Slick flickity js-->
+    <script src="assets/js/flickity.pkgd.min.js"></script>
+    <!-- Magnific popup js-->
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <!-- Countdown js-->
+    <script src="assets/js/jquery.countdown.js"></script>
+    <!-- CountTo js-->
+    <script src="assets/js/jquery.countTo.js"></script>
+    <!-- Masonry js-->
+    <script src="assets/js/masonry.pkgd.min.js"></script>
+    <!-- Global - Main js-->
+    <script src="assets/js/global.js"></script>
+
+<script>
+  import Splide from '@splidejs/splide';
+    var splide = new Splide( '.splide' );
+
+    // splide.on( 'autoplay:playing', function ( rate ) {
+    //     console.log( rate ); // 0-1
+    // } );
+    //
+    splide.mount(window.splide.Extensions);
+    //
+    // function next_slide() {
+    //
+    //     if(splide.index == splide.length - 1)
+    //         splide.go('0')
+    //     else
+    //         splide.go('+1')
+    //     setTimeout(next_slide,3000)
+    // }
+    // setTimeout(next_slide,3000)
+    //
+    // document.querySelectorAll('.rnd_image').forEach(element=> {
+    //     const rnd_image = "https://source.unsplash.com/random/500x450?sig="+Math.floor((Math.random() * 10000) + 1);
+    //     element.src = rnd_image;
+    // })
+
+
+
+</script>
+
+
+
+<!--   </article>-->
+
+
+</html>

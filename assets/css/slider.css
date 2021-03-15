@@ -1,0 +1,79 @@
+/*.slider_test{*/
+/*  height: 50px !important;*/
+/*  padding-left:15px !important;*/
+/*  overflow: hidden !important;*/
+/*}*/
+/*.slider_test div {*/
+/*  color:#fff !important;*/
+/*  height: 50px !important;*/
+/*  margin-bottom: 50px !important;*/
+/*  padding: 2px 15px !important;*/
+/*  text-align: justify !important;*/
+/*  box-sizing: border-box !important;*/
+/*}*/
+/*.slider-text1 {*/
+/*  background: lightgreen;*/
+/*  animation: slide 5s linear infinite;*/
+/*}*/
+/*.slider-text2 {*/
+/*  background: skyblue;*/
+/*}*/
+/*.slider-text3 {*/
+/*  background: lightcoral;*/
+/*}*/
+/*@keyframes slide {*/
+/*  0% {margin-top:-300px;}*/
+/*  5% {margin-top:-200px;}*/
+/*  33% {margin-top:-200px;}*/
+/*  38% {margin-top:-100px;}*/
+/*  66% {margin-top:-100px;}*/
+/*  71% {margin-top:0px;}*/
+/*  100% {margin-top:0px;}*/
+/*}*/
+
+/*body{*/
+/*  margin: 0;*/
+/*  color: white;*/
+/*  font-size: 24px;*/
+/*}*/
+.container2{
+  width: 100%;
+  height: 100%;
+  background: black;
+  position: absolute;
+}
+.box2{
+    margin: auto auto;
+    display: flex;
+    width: 50px;
+    justify-content: space-evenly;
+}
+
+.nametag2{
+  position: absolute;
+}
+
+.nametag2:nth-child(1){
+  animation-name: fade;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-duration: 5s;
+  animation-direction: alternate-reverse;
+}
+
+.nametag2:nth-child(2){
+  animation-name: fade;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-duration: 5s;
+  animation-direction: alternate;
+}
+
+@keyframes fade{
+    0%,45% {
+      opacity: 0;
+}
+    100%{
+      opacity: 1;
+  }
+}

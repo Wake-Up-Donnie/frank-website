@@ -1,0 +1,93 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<video autoplay loop class="video" poster="https://www.tesla.com/xNVh4yUEc3B9/performance_desktop_still.png" id="herovideo"></video>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        var breakpoint = 1024;
+
+        loadVideo();
+
+        // Pause when page is not in the foreground
+        $(window).blur(function() {
+            $('#herovideo')[0].pause();
+        });
+
+        // Play when page returns to the foreground
+        $(window).focus(function() {
+            if ($(document).width() > breakpoint) {
+                $('#herovideo')[0].play();
+            }
+        });
+
+        // Play video when page resizes
+        $(window).resize(function() {
+            loadVideo();
+        });
+
+        // Play when page returns from browser history button
+        window.onpopstate = function() {
+            if ($(document).width() > breakpoint) {
+                $('#herovideo')[0].play();
+            }
+        };
+
+        function loadVideo() {
+            var video = document.getElementById('herovideo');
+
+            // Remove existing source tags for mobile
+            if ($(document).width() < breakpoint + 1) {
+                while (video.firstChild) {
+                    video.removeChild(video.firstChild);
+                }
+            }
+
+            // Add source tags if not already present
+            if ($(document).width() > breakpoint) {
+                if (document.querySelectorAll("#herovideo > source").length < 1) {
+                    var source1 = document.createElement('source');
+                    var source2 = document.createElement('source');
+                    var source3 = document.createElement('source');
+
+                    source1.setAttribute('src', '/tablet.mp4');
+                    source1.setAttribute('type', 'video/mp4');
+
+                    source2.setAttribute('src', '/tablet.webm');
+                    source2.setAttribute('type', 'video/webm');
+
+                    source3.setAttribute('src', '/tablet.ogv');
+                    source3.setAttribute('type', 'video/ogg');
+
+                    video.appendChild(source1);
+                    video.appendChild(source2);
+                    video.appendChild(source3);
+                }
+
+                // Play the video
+                $('#herovideo')[0].play();
+            }
+        }
+    });
+</script>
+
+
+
+</body>
+</html>
